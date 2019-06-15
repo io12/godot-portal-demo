@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Protoscape"
+config/name="Godot Portal Demo"
 run/main_scene="res://assets/levels/Intro.tscn"
 config/icon="res://icon.png"
 
