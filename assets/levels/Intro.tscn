@@ -1,0 +1,161 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/Cube.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/scenes/WireLine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/scenes/Gate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scenes/PortalPair.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0, 0.631373, 1 )
+albedo_texture = SubResource( 3 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1 )
+
+[sub_resource type="OpenSimplexNoise" id=6]
+
+[sub_resource type="NoiseTexture" id=7]
+noise = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.796078, 0.215686, 0.215686, 1 )
+albedo_texture = SubResource( 7 )
+
+[sub_resource type="CylinderMesh" id=9]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 4.0
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.219608, 0.901961, 0, 1 )
+
+[node name="Intro" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 3.50953, 5 )
+
+[node name="Floor" type="MeshInstance" parent="."]
+transform = Transform( 18, 0, 0, 0, 1, 0, 0, 0, 113.732, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="RampA" type="MeshInstance" parent="."]
+transform = Transform( 14.7682, -0.58593, 0, 10.2914, 0.840815, 0, 0, 0, 14.9831, 30.4653, 9.60312, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="RampA"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RampA/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="RampA2" type="MeshInstance" parent="."]
+transform = Transform( 14.7682, -0.58593, 0, 10.2914, 0.840815, 0, 0, 0, 14.9831, 1.4653, 9.60312, -25 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="RampA2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RampA2/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="RampB" type="MeshInstance" parent="."]
+transform = Transform( -5.30964, 0.979233, -1.03257e-06, 17.1994, 0.302301, 8.05943e-07, 1.29108e-06, -5.12236e-08, -14.9831, -23.0902, 16.5738, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="RampB"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RampB/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="Cube" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.007, 4.89307, 10.2878 )
+
+[node name="Button" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
+
+[node name="Wire" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0 )
+
+[node name="Wire2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )
+
+[node name="Wire3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
+
+[node name="Gate" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
+
+[node name="PortalPair" parent="." instance=ExtResource( 6 )]
+
+[node name="PortalA" parent="PortalPair" index="0"]
+transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-08, -8.74228e-08, -2.98023e-08, 1, 8, 4, 15 )
+
+[node name="PortalB" parent="PortalPair" index="1"]
+transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 15, 4, 15 )
+
+[node name="PortalBorderA" type="Spatial" parent="."]
+editor/display_folded = true
+transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 8, 4, 15 )
+
+[node name="MeshInstance" type="MeshInstance" parent="PortalBorderA"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="PortalBorderA"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="PortalBorderA"]
+transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, -2.1, 0, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="PortalBorderA"]
+transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, 2.1, 0, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="PortalBorderB" type="Spatial" parent="."]
+editor/display_folded = true
+transform = Transform( -1, 8.29045e-16, 8.74228e-08, -1.77636e-15, 1, -2.98023e-08, -8.74228e-08, -2.98023e-08, -1, 15, 4, 15 )
+
+[node name="MeshInstance" type="MeshInstance" parent="PortalBorderB"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="PortalBorderB"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="PortalBorderB"]
+transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, -2.1, 0, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="PortalBorderB"]
+transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, 2.1, 0, 0 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
+
+[editable path="PortalPair"]
