@@ -48,11 +48,15 @@ func move_camera(portal: Node) -> void:
 
 # Use an oblique near plane to prevent anything behind a portal from being
 # visible through the linked portal
+#
+# TODO: Handle other camera modes
 func update_near_plane(portal: Node) -> void:
 	var cam: Camera = portal.get_node("Viewport/Camera")
 	var pos := cam.transform.origin
 	cam.frustum_offset = -Vector2(pos.x, pos.y)
 	cam.near = pos.length()
+	var fov := get_camera().fov
+	cam.size = 2 * cam.near * cam.aspect / (cos(fov) / sin(fov))
 
 
 # Sync the viewport size with the window size
