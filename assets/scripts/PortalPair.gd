@@ -55,8 +55,8 @@ func update_near_plane(portal: Node) -> void:
 	var cam: Camera = viewport.get_node("Camera")
 	var pos := cam.transform.origin
 	cam.frustum_offset = -Vector2(pos.x, pos.y)
-	cam.near = pos.length()
-	var aspect := viewport.size.aspect()
+	cam.near = pos.z
+	var aspect := 1 / viewport.size.aspect()
 	var fov := get_camera().fov
 	var cotangent := cos(fov) / sin(fov)
 	cam.size = 2 * cam.near * aspect / cotangent
