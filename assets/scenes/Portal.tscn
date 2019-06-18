@@ -37,7 +37,9 @@ height = 4.0
 [node name="Viewport" type="Viewport" parent="."]
 
 [node name="Camera" type="Camera" parent="Viewport"]
+projection = 2
 current = true
+size = 0.1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
