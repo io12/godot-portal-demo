@@ -51,15 +51,22 @@ func move_camera(portal: Node) -> void:
 #
 # TODO: Handle other camera modes
 func update_near_plane(portal: Node) -> void:
-	var viewport: Viewport = portal.get_node("Viewport")
-	var cam: Camera = viewport.get_node("Camera")
-	var pos := cam.transform.origin
-	cam.frustum_offset = -Vector2(pos.x, pos.y)
-	cam.near = pos.z
-	var aspect := 1 / viewport.size.aspect()
+	var linked: Node = links[portal]
+	var linked_viewport: Viewport = linked.get_node("Viewport")
+	var linked_cam: Camera = linked_viewport.get_node("Camera")
+
+	# Position of linked camera relative to this portal
+	var rel_pos: Vector3 = (portal.transform.inverse() * linked_cam.transform).origin
+
+	#cam.frustum_offset = -Vector2(pos.x, pos.y)
+	#cam.near = pos.z
+	var aspect := 1 / linked_viewport.size.aspect()
 	var fov := get_camera().fov
 	var cotangent := cos(fov) / sin(fov)
-	cam.size = 2 * cam.near * aspect / cotangent
+	var near := rel_pos.z
+	print(near)
+	#cam.size = 2 * cam.near * aspect / cotangent
+	linked_cam.set_frustum(2 * near * aspect / cotangent , -Vector2(rel_pos.x, rel_pos.y), near, 1000.0)
 
 
 # Sync the viewport size with the window size
