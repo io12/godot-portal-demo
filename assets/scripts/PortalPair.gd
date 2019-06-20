@@ -1,3 +1,4 @@
+tool
 extends Node
 
 onready var portals := [$PortalA, $PortalB]
@@ -11,10 +12,10 @@ var clones := {}
 
 
 func init_portal(portal: Node) -> void:
+	# TODO: Update comment
 	# Connect the mesh material shader to the viewport of the linked portal
-	var linked: Node = links[portal]
-	var link_viewport: Viewport = linked.get_node("Viewport")
-	var tex := link_viewport.get_texture()
+	var viewport: Viewport = portal.get_node("Viewport")
+	var tex := viewport.get_texture()
 	var mat = portal.get_node("MeshInstance").material_override
 	mat.set_shader_param("texture_albedo", tex)
 
@@ -26,10 +27,10 @@ func _ready() -> void:
 
 
 func get_camera() -> Camera:
-	if Engine.is_editor_hint():
-		return get_node("/root/EditorCameraProvider").get_camera()
-	else:
-		return get_viewport().get_camera()
+	#if Engine.is_editor_hint():
+		#return get_node("/root/EditorCameraProvider").get_camera()
+	#else:
+	return get_viewport().get_camera()
 
 
 # Move the camera to a location near the linked portal; this is done by
@@ -43,7 +44,8 @@ func move_camera(portal: Node) -> void:
 	trans = trans.rotated(up, PI)
 	portal.get_node("CameraHolder").transform = trans
 	var cam_pos: Transform = portal.get_node("CameraHolder").global_transform
-	portal.get_node("Viewport/Camera").global_transform = cam_pos
+	# TODO: Ensure camera is angled properly
+	portal.get_node("Viewport/Camera").global_transform.origin = cam_pos.origin
 
 
 # Use an oblique near plane to prevent anything behind a portal from being
@@ -60,20 +62,18 @@ func update_near_plane(portal: Spatial) -> void:
 	var p_norm := p_trans.basis.z
 	var plane := Plane(p_norm, p_pos.dot(p_norm))
 
-	var aspect := 1 / viewport.size.aspect()
-	var fov := get_camera().fov
-	var cotangent := cos(fov) / sin(fov)
-	var near := plane.distance_to(cam_pos)
+	var proj_pos := plane.project(cam_pos)
+	var near := proj_pos.distance_to(cam_pos)
 	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
-	var off := -Vector2(off_3d.x, off_3d.y)
-	var size := 2 * near * aspect / cotangent
-	print()
+	var off := Vector2(-off_3d.x, off_3d.y)
+	var size = portal.get_node("MeshInstance").mesh.size.x
 	cam.set_frustum(size, off, near, 1000.0)
 
 
 # Sync the viewport size with the window size
 func sync_viewport(portal: Node) -> void:
-	portal.get_node("Viewport").size = get_viewport().size
+	# TODO: Refactor this
+	portal.get_node("Viewport").size = portal.get_node("MeshInstance").mesh.size * 100
 
 
 # warning-ignore:unused_argument
