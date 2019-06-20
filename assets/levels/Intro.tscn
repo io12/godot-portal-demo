@@ -41,7 +41,7 @@ albedo_color = Color( 0.219608, 0.901961, 0, 1 )
 [node name="Intro" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 3.50953, 5 )
+transform = Transform( -0.999868, 0, 0.0162235, 0, 1, 0, -0.0162235, 0, -0.999868, 14.6749, 4.39838, 10.473 )
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 18, 0, 0, 0, 1, 0, 0, 0, 113.732, 0, 0, 0 )
@@ -84,7 +84,7 @@ material/0 = SubResource( 8 )
 shape = SubResource( 5 )
 
 [node name="Cube" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.007, 4.89307, 10.2878 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.853, 8.96407, 10.9036 )
 
 [node name="Button" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
@@ -104,13 +104,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 [node name="PortalPair" parent="." instance=ExtResource( 5 )]
 
 [node name="PortalA" parent="PortalPair" index="0"]
-transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-08, -8.74228e-08, -2.98023e-08, 1, 8, 4, 15 )
+transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-08, -8.74228e-08, -2.98023e-08, 1, 7.8085, 5.49477, 15 )
 
 [node name="PortalB" parent="PortalPair" index="1"]
-transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 15, 4, 15 )
+transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 15.0439, 4, 15 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
-transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 8, 4, 15 )
+transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 7.8085, 5.49477, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )

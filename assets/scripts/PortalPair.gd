@@ -1,3 +1,4 @@
+tool
 extends Node
 
 onready var portals := [$PortalA, $PortalB]
@@ -26,10 +27,10 @@ func _ready() -> void:
 
 
 func get_camera() -> Camera:
-	if Engine.is_editor_hint():
-		return get_node("/root/EditorCameraProvider").get_camera()
-	else:
-		return get_viewport().get_camera()
+	#if Engine.is_editor_hint():
+		#return get_node("/root/EditorCameraProvider").get_camera()
+	#else:
+	return get_viewport().get_camera()
 
 
 # Move the camera to a location near the linked portal; this is done by
@@ -64,7 +65,7 @@ func update_near_plane(portal: Spatial) -> void:
 	var proj_pos := plane.project(cam_pos)
 	var near := proj_pos.distance_to(cam_pos)
 	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
-	var off := Vector2(-off_3d.x, off_3d.y)
+	var off := -Vector2(off_3d.x, off_3d.y)
 	var size = portal.get_node("MeshInstance").mesh.size.x
 	cam.set_frustum(size, off, near, 1000.0)
 
