@@ -43,7 +43,8 @@ func move_camera(portal: Node) -> void:
 	trans = trans.rotated(up, PI)
 	portal.get_node("CameraHolder").transform = trans
 	var cam_pos: Transform = portal.get_node("CameraHolder").global_transform
-	portal.get_node("Viewport/Camera").global_transform = cam_pos
+	# TODO: Ensure camera is angled properly
+	portal.get_node("Viewport/Camera").global_transform.origin = cam_pos.origin
 
 
 # Use an oblique near plane to prevent anything behind a portal from being
@@ -60,14 +61,10 @@ func update_near_plane(portal: Spatial) -> void:
 	var p_norm := p_trans.basis.z
 	var plane := Plane(p_norm, p_pos.dot(p_norm))
 
-	var aspect := 1 / viewport.size.aspect()
-	var fov := get_camera().fov
-	var cotangent := cos(fov) / sin(fov)
 	var near := plane.distance_to(cam_pos)
 	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
 	var off := -Vector2(off_3d.x, off_3d.y)
-	var size := 2 * near * aspect / cotangent
-	print()
+	var size = portal.get_node("MeshInstance").mesh.size.x
 	cam.set_frustum(size, off, near, 1000.0)
 
 
