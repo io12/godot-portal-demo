@@ -37,6 +37,7 @@ height = 4.0
 [node name="Viewport" type="Viewport" parent="."]
 
 [node name="Camera" type="Camera" parent="Viewport"]
+keep_aspect = 0
 current = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

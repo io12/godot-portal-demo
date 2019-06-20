@@ -62,7 +62,8 @@ func update_near_plane(portal: Spatial) -> void:
 	var p_norm := p_trans.basis.z
 	var plane := Plane(p_norm, p_pos.dot(p_norm))
 
-	var near := plane.distance_to(cam_pos)
+	var proj_pos := plane.project(cam_pos)
+	var near := proj_pos.distance_to(cam_pos)
 	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
 	var off := Vector2(-off_3d.x, off_3d.y)
 	var size = portal.get_node("MeshInstance").mesh.size.x * 2
