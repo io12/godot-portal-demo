@@ -41,7 +41,7 @@ albedo_color = Color( 0.219608, 0.901961, 0, 1 )
 [node name="Intro" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.999868, 0, 0.0162235, 0, 1, 0, -0.0162235, 0, -0.999868, 15.0723, 3.18055, 10.6182 )
+transform = Transform( -0.999868, 0, 0.0162235, 0, 1, 0, -0.0162235, 0, -0.999868, 15.0723, 3.18055, 11.0869 )
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 18, 0, 0, 0, 1, 0, 0, 0, 113.732, 0, 0, 0 )
@@ -84,7 +84,7 @@ material/0 = SubResource( 8 )
 shape = SubResource( 5 )
 
 [node name="Cube" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.99502, 5.23864, 3.46475 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.58634, 4.12721, 11.5099 )
 
 [node name="Button" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
