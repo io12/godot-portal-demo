@@ -1,55 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/scripts/PortalPair.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/Portal.tscn" type="PackedScene" id=2]
-
-[sub_resource type="Shader" id=1]
-resource_local_to_scene = true
-code = "shader_type spatial;
-render_mode unshaded;
-uniform sampler2D texture_albedo : hint_albedo;
-
-void vertex() {
-}
-
-void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	ALBEDO = albedo_tex.rgb;
-}
-"
-
-[sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("Viewport")
-
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/texture_albedo = SubResource( 2 )
-
-[sub_resource type="Shader" id=4]
-resource_local_to_scene = true
-code = "shader_type spatial;
-render_mode unshaded;
-uniform sampler2D texture_albedo : hint_albedo;
-
-void vertex() {
-}
-
-void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	ALBEDO = albedo_tex.rgb;
-}
-"
-
-[sub_resource type="ViewportTexture" id=5]
-viewport_path = NodePath("Viewport")
-
-[sub_resource type="ShaderMaterial" id=6]
-resource_local_to_scene = true
-shader = SubResource( 4 )
-shader_param/texture_albedo = SubResource( 5 )
 
 [node name="PortalPair" type="Node"]
 script = ExtResource( 1 )
@@ -68,9 +20,6 @@ frustum_offset = Vector2( -8.85501, 0.749211 )
 near = 3.23545
 far = 1000.0
 
-[node name="MeshInstance" parent="PortalA" index="1"]
-material_override = SubResource( 3 )
-
 [node name="PortalB" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
 
@@ -84,9 +33,6 @@ size = 4.0
 frustum_offset = Vector2( -0.855011, 0.749211 )
 near = 3.23545
 far = 1000.0
-
-[node name="MeshInstance" parent="PortalB" index="1"]
-material_override = SubResource( 6 )
 [connection signal="body_exited" from="PortalA/Area" to="." method="_on_portal_a_body_exited"]
 [connection signal="body_exited" from="PortalB/Area" to="." method="_on_portal_b_body_exited"]
 

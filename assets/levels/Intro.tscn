@@ -41,7 +41,7 @@ albedo_color = Color( 0.219608, 0.901961, 0, 1 )
 [node name="Intro" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.999868, 0, 0.0162235, 0, 1, 0, -0.0162235, 0, -0.999868, 14.8612, 3.86376, 11.8456 )
+transform = Transform( -0.999868, 0, 0.0162235, 0, 1, 0, -0.0162235, 0, -0.999868, 15.0723, 3.18055, 10.6182 )
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 18, 0, 0, 0, 1, 0, 0, 0, 113.732, 0, 0, 0 )
@@ -104,10 +104,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 [node name="PortalPair" parent="." instance=ExtResource( 1 )]
 
 [node name="PortalA" parent="PortalPair" index="0"]
-transform = Transform( 0.663426, 2.22993e-08, -0.748242, -7.10543e-15, 1, 2.98023e-08, 0.748242, -1.97716e-08, 0.663426, 5.73929, 3.9995, 13.135 )
+transform = Transform( -0.66343, 0, 0.748238, 0, 1, 0, -0.748238, 0, -0.66343, 5.73929, 3.9995, 13.135 )
 
 [node name="PortalB" parent="PortalPair" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9937, 4, 15 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14.9937, 4, 15 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
 transform = Transform( 0.663426, 2.22993e-08, -0.748242, -1.77636e-15, 1, 2.98023e-08, 0.748242, -1.97716e-08, 0.663426, 5.69562, 3.9995, 13.149 )
