@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 # Return whether the position is in front of a portal
 func in_front_of_portal(portal: Node, pos: Transform) -> bool:
 	var portal_pos = portal.global_transform
-	return portal_pos.xform_inv(pos.origin).z < 0
+	return portal_pos.xform_inv(pos.origin).z > 0
 
 
 # Swap the velocities and positions of a body and its clone
