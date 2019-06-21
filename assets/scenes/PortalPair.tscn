@@ -20,6 +20,7 @@ void fragment() {
 "
 
 [sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport")
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
@@ -43,6 +44,7 @@ void fragment() {
 "
 
 [sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Viewport")
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true

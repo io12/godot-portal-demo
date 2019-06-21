@@ -11,21 +11,6 @@ onready var links := {
 var clones := {}
 
 
-func init_portal(portal: Node) -> void:
-	# TODO: Update comment
-	# Connect the mesh material shader to the viewport of the linked portal
-	var viewport: Viewport = portal.get_node("Viewport")
-	var tex := viewport.get_texture()
-	var mat = portal.get_node("MeshInstance").material_override
-	mat.set_shader_param("texture_albedo", tex)
-
-
-# Init portals
-func _ready() -> void:
-	for portal in portals:
-		init_portal(portal)
-
-
 func get_camera() -> Camera:
 	#if Engine.is_editor_hint():
 		#return get_node("/root/EditorCameraProvider").get_camera()
@@ -43,19 +28,18 @@ func project_portal_plane(portal: Spatial, point: Vector3) -> Vector3:
 
 
 # Move the camera to a location near the linked portal; this is done by
-# taking the position of the player relative to the linked portal, and
-# rotating it pi radians
+# calculations on the position of the player relative to the portal
 #
 # TODO: Update comment
 func move_camera(portal: Spatial) -> void:
-	var linked: Node = links[portal]
-	var trans: Transform = linked.global_transform.inverse() \
-			* get_camera().global_transform
+	var p_trans := portal.global_transform
+	var linked: Spatial = links[portal]
+	var linked_trans := linked.global_transform
+	var trans: Transform = p_trans.inverse() * get_camera().global_transform
 	var up := Vector3(0, 1, 0)
 	trans = trans.rotated(up, PI)
-	var p_trans := portal.global_transform
-	trans = p_trans * trans
-	var proj_pos := project_portal_plane(portal, trans.origin)
+	trans = linked_trans * trans
+	var proj_pos := project_portal_plane(linked, trans.origin)
 	trans = trans.looking_at(proj_pos, p_trans.basis.y)
 	portal.get_node("Viewport/Camera").global_transform = trans
 
@@ -64,17 +48,18 @@ func move_camera(portal: Spatial) -> void:
 # visible through the linked portal
 #
 # TODO: Handle other camera modes
+# TODO: Update comment
 func update_near_plane(portal: Spatial) -> void:
-	var linked: Spatial = links[portal]
-	var viewport: Viewport = linked.get_node("Viewport")
-	var cam: Camera = viewport.get_node("Camera")
+	var cam: Camera = portal.get_node("Viewport/Camera")
 	var p_trans := portal.global_transform
 	var cam_pos := cam.global_transform.origin
 
-	var proj_pos := project_portal_plane(portal, cam_pos)
+	var linked: Spatial = links[portal]
+	var l_trans := linked.global_transform
+	var proj_pos := project_portal_plane(linked, cam_pos)
 	var near := proj_pos.distance_to(cam_pos)
-	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
-	var off := Vector2(-off_3d.x, off_3d.y)
+	var off_3d: Vector3 = l_trans.xform_inv(cam_pos)
+	var off := -Vector2(off_3d.x, off_3d.y)
 	var size = portal.get_node("MeshInstance").mesh.size.x
 	cam.set_frustum(size, off, near, 1000.0)
 

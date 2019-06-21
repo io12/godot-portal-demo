@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [sub_resource type="Shader" id=1]
 resource_local_to_scene = true
@@ -16,9 +16,13 @@ void fragment() {
 }
 "
 
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Viewport")
+
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
+shader_param/texture_albedo = SubResource( 6 )
 
 [sub_resource type="QuadMesh" id=3]
 size = Vector2( 4, 4 )
