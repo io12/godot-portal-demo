@@ -70,10 +70,8 @@ func update_near_plane(portal: Spatial) -> void:
 	var p_trans := portal.global_transform
 	var p_pos := p_trans.origin
 	var cam_pos := cam.global_transform.origin
-	var p_norm := p_trans.basis.z
-	var plane := Plane(p_norm, p_pos.dot(p_norm))
 
-	var proj_pos := plane.project(cam_pos)
+	var proj_pos := project_portal_plane(portal, cam_pos)
 	var near := proj_pos.distance_to(cam_pos)
 	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
 	var off := Vector2(-off_3d.x, off_3d.y)
