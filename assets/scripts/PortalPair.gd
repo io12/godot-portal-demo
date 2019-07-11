@@ -33,6 +33,15 @@ func get_camera() -> Camera:
 	return get_viewport().get_camera()
 
 
+# Project a point onto a portal plane, returning the projected point
+func project_portal_plane(portal: Spatial, point: Vector3) -> Vector3:
+	var p_trans := portal.global_transform
+	var p_pos := p_trans.origin
+	var p_norm := p_trans.basis.z
+	var plane := Plane(p_norm, p_pos.dot(p_norm))
+	return plane.project(point)
+
+
 # Move the camera to a location near the linked portal; this is done by
 # taking the position of the player relative to the linked portal, and
 # rotating it pi radians
@@ -43,9 +52,10 @@ func move_camera(portal: Node) -> void:
 	var up := Vector3(0, 1, 0)
 	trans = trans.rotated(up, PI)
 	portal.get_node("CameraHolder").transform = trans
-	var cam_pos: Transform = portal.get_node("CameraHolder").global_transform
-	# TODO: Ensure camera is angled properly
-	portal.get_node("Viewport/Camera").global_transform.origin = cam_pos.origin
+	var cam_trans: Transform = portal.get_node("CameraHolder").global_transform
+	var proj := project_portal_plane(portal, cam_trans.origin)
+	cam_trans.looking_at(proj, Vector3(0, 1, 0)) # TODO: change up vec
+	portal.get_node("Viewport/Camera").global_transform = cam_trans
 
 
 # Use an oblique near plane to prevent anything behind a portal from being
