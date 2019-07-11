@@ -45,10 +45,10 @@ func project_portal_plane(portal: Spatial, point: Vector3) -> Vector3:
 # Move the camera to a location near the linked portal; this is done by
 # taking the position of the player relative to the linked portal, and
 # rotating it pi radians
-func move_camera(portal: Node) -> void:
-	var linked: Node = links[portal]
+func move_camera(portal: Spatial) -> void:
+	var linked: Spatial = links[portal]
 	var trans: Transform = linked.global_transform.inverse() \
-			* get_camera().global_transform
+		* get_camera().global_transform
 	var up := Vector3(0, 1, 0)
 	trans = trans.rotated(up, PI)
 	portal.get_node("CameraHolder").transform = trans
@@ -143,7 +143,7 @@ func handle_body_overlap_portal(portal: Node, body: PhysicsBody) -> void:
 		clone.linear_velocity = clone.linear_velocity.rotated(up, PI)
 
 	clone.global_transform = linked_pos \
-			* rel_pos.rotated(up, PI)
+		* rel_pos.rotated(up, PI)
 
 	# Swap clone and actual if the actual object is more than halfway through 
 	# the portal
