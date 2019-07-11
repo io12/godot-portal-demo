@@ -54,7 +54,8 @@ func move_camera(portal: Node) -> void:
 	portal.get_node("CameraHolder").transform = trans
 	var cam_trans: Transform = portal.get_node("CameraHolder").global_transform
 	var proj := project_portal_plane(portal, cam_trans.origin)
-	cam_trans.looking_at(proj, Vector3(0, 1, 0)) # TODO: change up vec
+	# TODO: change up vec
+	cam_trans = cam_trans.looking_at(proj, Vector3(0, 1, 0))
 	portal.get_node("Viewport/Camera").global_transform = cam_trans
 
 
