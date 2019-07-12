@@ -114,9 +114,14 @@ func get_portal_res(portal: Spatial) -> float:
 
 # Sync the viewport size with the window size
 func sync_viewport(portal: Spatial) -> void:
+	var linked: Spatial = links[portal]
 	var viewport: Viewport = portal.get_node("Viewport")
-	var res := get_portal_res(portal)
-	viewport.size = Vector2(res, res)
+	var linked_viewport: Viewport = linked.get_node("Viewport")
+	var res := max(get_portal_res(portal), get_portal_res(linked))
+	var size := Vector2(res, res)
+	print(res)
+	viewport.size = size
+	linked_viewport.size = size
 
 
 # warning-ignore:unused_argument
