@@ -88,7 +88,7 @@ func get_portal_verts(portal: Spatial) -> PoolVector3Array:
 
 
 # Get the resolution of a portal screen
-func get_portal_res(portal: Spatial) -> int:
+func get_portal_res(portal: Spatial) -> float:
 	var verts := get_portal_verts(portal)
 	var cam := get_camera()
 
