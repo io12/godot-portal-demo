@@ -47,11 +47,12 @@ func project_portal_plane(portal: Spatial, point: Vector3) -> Vector3:
 # rotating it pi radians
 func move_camera(portal: Spatial) -> void:
 	var linked: Spatial = links[portal]
-	var trans: Transform = linked.global_transform.inverse() \
+	var trans: Transform = portal.global_transform.inverse() \
 		* get_camera().global_transform
 	var up := Vector3(0, 1, 0)
 	trans = trans.rotated(up, PI)
-	portal.get_node("CameraHolder").transform = trans
+	trans = linked.global_transform * trans
+	portal.get_node("CameraHolder").global_transform = trans
 	var cam_trans: Transform = portal.get_node("CameraHolder").global_transform
 	var proj := project_portal_plane(portal, cam_trans.origin)
 	# TODO: change up vec
