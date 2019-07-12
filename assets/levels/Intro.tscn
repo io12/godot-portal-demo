@@ -4,8 +4,8 @@
 [ext_resource path="res://assets/scenes/PortalPair.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scenes/Button.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/scenes/Gate.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/scenes/WireLine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/WireLine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scenes/Gate.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -89,16 +89,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.99502, 5.23864, 3.46475 )
 [node name="Button" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
 
-[node name="Wire" parent="." instance=ExtResource( 6 )]
+[node name="Wire" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0 )
 
-[node name="Wire2" parent="." instance=ExtResource( 6 )]
+[node name="Wire2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )
 
-[node name="Wire3" parent="." instance=ExtResource( 6 )]
+[node name="Wire3" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
 
-[node name="Gate" parent="." instance=ExtResource( 5 )]
+[node name="Gate" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 
 [node name="PortalPair" parent="." instance=ExtResource( 2 )]

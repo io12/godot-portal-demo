@@ -1,4 +1,4 @@
-tool
+#tool
 extends Node
 
 onready var portals := [$PortalA, $PortalB]
@@ -81,10 +81,15 @@ func update_near_plane(portal: Spatial) -> void:
 
 
 # Get the vertices of a portal screen
-func get_portal_verts(portal: Spatial) -> PoolVector3Array:
+func get_portal_verts(portal: Spatial) -> Array:
 	var meshinst: MeshInstance = portal.get_node("MeshInstance")
 	var mesh := meshinst.mesh
-	var verts := mesh.get_faces()
+	var loc_verts := mesh.get_faces()
+	assert loc_verts.size() == 6
+	var verts := []
+	for loc_vert in loc_verts:
+		var vert: Vector3 = meshinst.global_transform.xform(loc_vert)
+		verts.append(vert)
 	assert verts.size() == 6
 	return verts
 
