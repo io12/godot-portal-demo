@@ -104,13 +104,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 [node name="PortalPair" parent="." instance=ExtResource( 2 )]
 
 [node name="PortalA" parent="PortalPair" index="0"]
-transform = Transform( -0.152374, 2.94543e-08, -0.988323, 7.10543e-15, -1, -2.98023e-08, 0.988323, 4.5411e-09, -0.152374, 6.75417, 3.9995, 15 )
+transform = Transform( -0.127072, 0.551836, -0.824214, -0.0840854, -0.833952, -0.545392, 0.988323, 4.5411e-09, -0.152374, 6.75417, 3.9995, 15 )
 
 [node name="PortalB" parent="PortalPair" index="1"]
 transform = Transform( 1, -2.72366e-15, -1.50996e-07, 1.77636e-15, -1, 2.98023e-08, 1.50996e-07, 2.98023e-08, 1, 14.9937, 4, 15 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
-transform = Transform( 0.152374, -2.94543e-08, 0.988323, -1.77636e-15, 1, 2.98023e-08, -0.988323, -4.54109e-09, 0.152374, 6.75417, 3.9995, 15 )
+transform = Transform( 0.127072, -0.551836, 0.824214, 0.0840854, 0.833952, 0.545392, -0.988323, -4.54109e-09, 0.152374, 6.75417, 3.9995, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
