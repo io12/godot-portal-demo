@@ -80,10 +80,43 @@ func update_near_plane(portal: Spatial) -> void:
 	cam.set_frustum(size, off, near, 1000.0)
 
 
+# Get the vertices of a portal screen
+func get_portal_verts(portal: Spatial) -> PoolVector3Array:
+	var meshinst: MeshInstance = portal.get_node("MeshInstance")
+	var mesh := meshinst.mesh
+	return mesh.get_faces()
+
+
+# Get the resolution of a portal screen
+func get_portal_res(portal: Spatial) -> int:
+	var verts := get_portal_verts(portal)
+	var cam := get_camera()
+
+	var first: Vector2 = cam.unproject_position(verts[0])
+
+	var max_x := first.x
+	var min_x := first.x
+	var max_y := first.y
+	var min_y := first.y
+
+	for vert in verts:
+		var proj := cam.unproject_position(vert)
+		max_x = max(proj.x, max_x)
+		min_x = min(proj.x, min_x)
+		max_y = max(proj.y, max_y)
+		min_y = min(proj.y, min_y)
+
+	var delta_x := max_x - min_x
+	var delta_y := max_y - min_y
+
+	return max(delta_x, delta_y)
+
+
 # Sync the viewport size with the window size
-func sync_viewport(portal: Node) -> void:
-	# TODO: Refactor this
-	portal.get_node("Viewport").size = portal.get_node("MeshInstance").mesh.size * 100
+func sync_viewport(portal: Spatial) -> void:
+	var viewport: Viewport = portal.get_node("Viewport")
+	var res := get_portal_res(portal)
+	viewport.size = Vector2(res, res)
 
 
 # warning-ignore:unused_argument
