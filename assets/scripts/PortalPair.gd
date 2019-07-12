@@ -84,7 +84,9 @@ func update_near_plane(portal: Spatial) -> void:
 func get_portal_verts(portal: Spatial) -> PoolVector3Array:
 	var meshinst: MeshInstance = portal.get_node("MeshInstance")
 	var mesh := meshinst.mesh
-	return mesh.get_faces()
+	var verts := mesh.get_faces()
+	assert verts.size() == 6
+	return verts
 
 
 # Get the resolution of a portal screen
