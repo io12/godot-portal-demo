@@ -18,6 +18,7 @@ support for [stencil buffering](https://github.com/godotengine/godot/issues/2372
 it doesn't have yet.
 
 - Fix holding RigidBody through portal
+- Dynamic portal resolution
 - Fix performance with stencil buffering
 - Seamless first-person player teleportation
 - Mesh culling for objects in portal
