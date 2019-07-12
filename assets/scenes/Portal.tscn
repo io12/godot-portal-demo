@@ -1,6 +1,15 @@
 [gd_scene load_steps=7 format=2]
 
+<<<<<<< HEAD
 [sub_resource type="Shader" id=1]
+=======
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="Shader" id=3]
+>>>>>>> origin/fix-oblique-frustum-rotation
 resource_local_to_scene = true
 code = "shader_type spatial;
 render_mode unshaded;
@@ -16,6 +25,7 @@ void fragment() {
 }
 "
 
+<<<<<<< HEAD
 [sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("Viewport")
 
@@ -31,11 +41,31 @@ size = Vector2( 4, 4 )
 extents = Vector3( 2, 2, 0 )
 
 [sub_resource type="CylinderShape" id=5]
+=======
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+
+[sub_resource type="QuadMesh" id=5]
+size = Vector2( 4, 4 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 2, 2, 0 )
+
+[sub_resource type="CylinderShape" id=7]
+>>>>>>> origin/fix-oblique-frustum-rotation
 radius = 0.1
 height = 4.0
 
 [node name="Portal" type="Spatial"]
 
+<<<<<<< HEAD
+=======
+[node name="CameraHolder" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+>>>>>>> origin/fix-oblique-frustum-rotation
 [node name="Viewport" type="Viewport" parent="."]
 render_target_v_flip = true
 
@@ -44,8 +74,14 @@ keep_aspect = 0
 current = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+<<<<<<< HEAD
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
+=======
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+material_override = SubResource( 4 )
+mesh = SubResource( 5 )
+>>>>>>> origin/fix-oblique-frustum-rotation
 material/0 = null
 
 [node name="Area" type="Area" parent="." groups=[
@@ -53,12 +89,17 @@ material/0 = null
 ]]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
+<<<<<<< HEAD
 shape = SubResource( 4 )
+=======
+shape = SubResource( 6 )
+>>>>>>> origin/fix-oblique-frustum-rotation
 
 [node name="Border" type="StaticBody" parent="."]
 
 [node name="CollisionShapeLow" type="CollisionShape" parent="Border"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
+<<<<<<< HEAD
 shape = SubResource( 5 )
 
 [node name="CollisionShapeHigh" type="CollisionShape" parent="Border"]
@@ -72,3 +113,18 @@ shape = SubResource( 5 )
 [node name="CollisionShapeRight" type="CollisionShape" parent="Border"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
 shape = SubResource( 5 )
+=======
+shape = SubResource( 7 )
+
+[node name="CollisionShapeHigh" type="CollisionShape" parent="Border"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
+shape = SubResource( 7 )
+
+[node name="CollisionShapeLeft" type="CollisionShape" parent="Border"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="CollisionShapeRight" type="CollisionShape" parent="Border"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
+shape = SubResource( 7 )
+>>>>>>> origin/fix-oblique-frustum-rotation

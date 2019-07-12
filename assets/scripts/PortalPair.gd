@@ -28,6 +28,7 @@ func project_portal_plane(portal: Spatial, point: Vector3) -> Vector3:
 
 
 # Move the camera to a location near the linked portal; this is done by
+<<<<<<< HEAD
 # calculations on the position of the player relative to the portal
 #
 # TODO: Update comment
@@ -42,6 +43,23 @@ func move_camera(portal: Spatial) -> void:
 	var proj_pos := project_portal_plane(linked, trans.origin)
 	trans = trans.looking_at(proj_pos, p_trans.basis.y)
 	portal.get_node("Viewport/Camera").global_transform = trans
+=======
+# taking the position of the player relative to the linked portal, and
+# rotating it pi radians
+func move_camera(portal: Spatial) -> void:
+	var linked: Spatial = links[portal]
+	var trans: Transform = portal.global_transform.inverse() \
+		* get_camera().global_transform
+	var up := Vector3(0, 1, 0)
+	trans = trans.rotated(up, PI)
+	trans = linked.global_transform * trans
+	portal.get_node("CameraHolder").global_transform = trans
+	var cam_trans: Transform = portal.get_node("CameraHolder").global_transform
+	var proj := project_portal_plane(linked, cam_trans.origin)
+	up = -linked.global_transform.basis.y
+	cam_trans = cam_trans.looking_at(proj, up)
+	portal.get_node("Viewport/Camera").global_transform = cam_trans
+>>>>>>> origin/fix-oblique-frustum-rotation
 
 
 # Use an oblique near plane to prevent anything behind a portal from being
@@ -54,9 +72,13 @@ func update_near_plane(portal: Spatial) -> void:
 	var p_trans := portal.global_transform
 	var cam_pos := cam.global_transform.origin
 
+<<<<<<< HEAD
 	var linked: Spatial = links[portal]
 	var l_trans := linked.global_transform
 	var proj_pos := project_portal_plane(linked, cam_pos)
+=======
+	var proj_pos := project_portal_plane(portal, cam_pos)
+>>>>>>> origin/fix-oblique-frustum-rotation
 	var near := proj_pos.distance_to(cam_pos)
 	var off_3d: Vector3 = l_trans.xform_inv(cam_pos)
 	var off := Vector2(off_3d.x, off_3d.y)
@@ -128,7 +150,7 @@ func handle_body_overlap_portal(portal: Node, body: PhysicsBody) -> void:
 		clone.linear_velocity = clone.linear_velocity.rotated(up, PI)
 
 	clone.global_transform = linked_pos \
-			* rel_pos.rotated(up, PI)
+		* rel_pos.rotated(up, PI)
 
 	# Swap clone and actual if the actual object is more than halfway through 
 	# the portal
