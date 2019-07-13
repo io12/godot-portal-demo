@@ -80,16 +80,11 @@ func update_near_plane(portal: Spatial) -> void:
 	cam.set_frustum(size, off, near, 1000.0)
 
 
-# Get the vertices of a portal screen
-func get_portal_verts(portal: Spatial) -> Array:
+# Get the vertices of a portal screen (in local coords)
+func get_portal_verts(portal: Spatial) -> PoolVector3Array:
 	var meshinst: MeshInstance = portal.get_node("MeshInstance")
 	var mesh := meshinst.mesh
-	var loc_verts := mesh.get_faces()
-	assert loc_verts.size() == 6
-	var verts := []
-	for loc_vert in loc_verts:
-		var vert: Vector3 = meshinst.global_transform.xform(loc_vert)
-		verts.append(vert)
+	var verts := mesh.get_faces()
 	assert verts.size() == 6
 	return verts
 
@@ -107,11 +102,14 @@ func get_portal_res(portal: Spatial) -> float:
 	var min_y := first.y
 
 	for vert in verts:
-		var proj := cam.unproject_position(vert)
-		max_x = max(proj.x, max_x)
-		min_x = min(proj.x, min_x)
-		max_y = max(proj.y, max_y)
-		min_y = min(proj.y, min_y)
+		# Transform to world coords
+		vert = portal.global_transform.xform(vert)
+		# Transform to screen coords
+		vert = cam.unproject_position(vert)
+		max_x = max(vert.x, max_x)
+		min_x = min(vert.x, min_x)
+		max_y = max(vert.y, max_y)
+		min_y = min(vert.y, min_y)
 
 	var delta_x := max_x - min_x
 	var delta_y := max_y - min_y
