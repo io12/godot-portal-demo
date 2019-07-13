@@ -81,9 +81,9 @@ func update_near_plane(portal: Spatial) -> void:
 
 
 # Sync the viewport size with the window size
-func sync_viewport(portal: Node) -> void:
-	# TODO: Refactor this
-	portal.get_node("Viewport").size = portal.get_node("MeshInstance").mesh.size * 100
+func sync_viewport(portal: Spatial) -> void:
+	var p_viewport: Viewport = portal.get_node("Viewport")
+	p_viewport.size = get_viewport().size
 
 
 # warning-ignore:unused_argument
