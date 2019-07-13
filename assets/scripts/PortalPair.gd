@@ -67,17 +67,18 @@ func move_camera(portal: Spatial) -> void:
 func update_near_plane(portal: Spatial) -> void:
 	var linked: Spatial = links[portal]
 	var viewport: Viewport = linked.get_node("Viewport")
-	var cam: Camera = viewport.get_node("Camera")
+	var p_cam: Camera = viewport.get_node("Camera")
 	var p_trans := portal.global_transform
-	var p_pos := p_trans.origin
-	var cam_pos := cam.global_transform.origin
+	var p_cam_pos := p_cam.global_transform.origin
 
-	var proj_pos := project_portal_plane(portal, cam_pos)
-	var near := proj_pos.distance_to(cam_pos)
-	var off_3d: Vector3 = p_trans.xform_inv(cam_pos)
+	var cam := get_camera()
+
+	var proj_pos := project_portal_plane(portal, p_cam_pos)
+	var near := proj_pos.distance_to(p_cam_pos)
+	var off_3d: Vector3 = p_trans.xform_inv(p_cam_pos)
 	var off := Vector2(-off_3d.x, off_3d.y)
-	var size = portal.get_node("MeshInstance").mesh.size.x
-	cam.set_frustum(size, off, near, 1000.0)
+
+	cam.set_frustum(cam.size, off, near, cam.far)
 
 
 # Sync the viewport size with the window size
