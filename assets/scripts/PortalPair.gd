@@ -1,4 +1,4 @@
-#tool
+tool
 extends Node
 
 onready var portals := [$PortalA, $PortalB]
@@ -123,8 +123,9 @@ func sync_viewport(portal: Spatial) -> void:
 	var viewport: Viewport = portal.get_node("Viewport")
 	var linked_viewport: Viewport = linked.get_node("Viewport")
 	var res := max(get_portal_res(portal), get_portal_res(linked))
-	var size := Vector2(res, res)
 	print(res)
+	res = 0 # TODO: Fix this
+	var size := Vector2(res, res)
 	viewport.size = size
 	linked_viewport.size = size
 
