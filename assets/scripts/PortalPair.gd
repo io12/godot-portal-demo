@@ -91,8 +91,14 @@ func get_portal_verts(portal: Spatial) -> PoolVector3Array:
 
 # Get the resolution of a portal screen
 func get_portal_res(portal: Spatial) -> float:
-	var verts := get_portal_verts(portal)
 	var cam := get_camera()
+	var portal_pos := portal.global_transform.origin
+
+	# If the portal is behind the camera, the resolution can be zero
+	if cam.is_position_behind(portal_pos):
+		return 0.0
+
+	var verts := get_portal_verts(portal)
 
 	var first: Vector2 = cam.unproject_position(verts[0])
 
@@ -121,7 +127,8 @@ func get_portal_res(portal: Spatial) -> float:
 func sync_viewport(portal: Spatial) -> void:
 	var viewport: Viewport = portal.get_node("Viewport")
 	var res := get_portal_res(portal)
-	print(res)
+	if portal.get_instance_id() > links[portal].get_instance_id():
+		print(res)
 	res = 0 # TODO: Fix this
 	var size := Vector2(res, res)
 	viewport.size = size
