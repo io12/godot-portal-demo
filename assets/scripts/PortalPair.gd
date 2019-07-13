@@ -78,7 +78,7 @@ func update_near_plane(portal: Spatial) -> void:
 	var off_3d: Vector3 = p_trans.xform_inv(p_cam_pos)
 	var off := Vector2(-off_3d.x, off_3d.y)
 
-	p_cam.set_frustum(cam.size, off, near, cam.far)
+	p_cam.set_frustum(5, off, near, cam.far)
 
 
 # Sync the viewport size with the window size
