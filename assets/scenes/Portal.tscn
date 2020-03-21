@@ -40,6 +40,7 @@ height = 4.0
 current = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 material/0 = null

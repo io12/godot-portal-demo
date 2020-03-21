@@ -41,7 +41,6 @@ albedo_color = Color( 0.219608, 0.901961, 0, 1 )
 [node name="Intro" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 3.50953, 5 )
 
 [node name="Floor" type="MeshInstance" parent="."]
@@ -111,7 +110,6 @@ transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-0
 transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 15, 4, 15 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 8, 4, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderA"]
@@ -135,7 +133,6 @@ mesh = SubResource( 9 )
 material/0 = SubResource( 10 )
 
 [node name="PortalBorderB" type="Spatial" parent="."]
-editor/display_folded = true
 transform = Transform( -1, 8.29045e-16, 8.74228e-08, -1.77636e-15, 1, -2.98023e-08, -8.74228e-08, -2.98023e-08, -1, 15, 4, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderB"]
