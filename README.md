@@ -18,14 +18,16 @@ support for [custom projection matrices](https://github.com/godotengine/godot/is
 and [stencil buffering](https://github.com/godotengine/godot/issues/23721), which
 it doesn't have yet.
 
-- Fix holding RigidBody through portal
-- Fix performance with stencil buffering
-- Oblique near-plane frustum for portal cameras
-- Seamless first-person player teleportation
-- Collision masking for objects behind portal
-- Lighting through portals
-- Portal camera FOV sync with player FOV
-- Portal dynamic updating in editor (optional, but nice)
+- Rendering
+  - Oblique near-plane frustum for portal cameras
+  - Fix performance with stencil buffering
+  - Lighting through portals
+  - Portal camera FOV sync with player FOV
+  - Portal dynamic updating in editor (optional, but nice)
+- Physics
+  - Seamless first-person player teleportation
+  - Fix holding RigidBody through portal
+  - Collision masking for objects behind portal
 
 ## How it works
 
