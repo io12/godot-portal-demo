@@ -22,7 +22,6 @@ it doesn't have yet.
 - Fix performance with stencil buffering
 - Oblique near-plane frustum for portal cameras
 - Seamless first-person player teleportation
-- Mesh culling for objects in portal
 - Collision masking for objects behind portal
 - Lighting through portals
 - Portal camera FOV sync with player FOV
