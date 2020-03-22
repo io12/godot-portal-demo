@@ -84,6 +84,15 @@ func swap_body_clone(body: RigidBody, clone: RigidBody) -> void:
 	body.linear_velocity = clone_vel
 
 
+func clone_duplicate_material(clone: PhysicsBody) -> void:
+	for child in clone.get_children():
+		if child.has_method("get_surface_material"):
+			# TODO: iterate over materials
+			var material: Material = child.get_surface_material(0)
+			material = material.duplicate(false)
+			child.set_surface_material(0, material)
+
+
 func handle_clones(portal: Node, body: PhysicsBody) -> void:
 	var linked: Node = links[portal]
 
@@ -106,6 +115,7 @@ func handle_clones(portal: Node, body: PhysicsBody) -> void:
 		clones[body] = clone
 		add_child(clone)
 		clone.linear_velocity = clone.linear_velocity.rotated(up, PI)
+		clone_duplicate_material(clone)
 
 	clone.global_transform = linked_pos \
 			* rel_pos.rotated(up, PI)
