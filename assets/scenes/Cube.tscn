@@ -12,16 +12,13 @@ code = "shader_type spatial;
 
 uniform vec4 portal_plane = vec4(0.0, 0.0, 0.0, 0.0);
 
-bool portal_culls(vec3 vertex, mat4 cam) {
-	vec3 pos = (cam * vec4(vertex, 1.0)).xyz;
-	return portal_plane.x * pos.x
-		+ portal_plane.y * pos.y
-		+ portal_plane.z * pos.z
-		+ portal_plane.w < 0.0;
+bool portal_culls(vec3 vertex, mat4 cam, mat4 world) {
+	vec3 pos = (inverse(world) * cam * vec4(vertex, 1.0)).xyz;
+	return dot(portal_plane.xyz, pos) < portal_plane.w;
 }
 
 void fragment() {
-	if (portal_culls(VERTEX, CAMERA_MATRIX)) {
+	if (portal_culls(VERTEX, CAMERA_MATRIX, WORLD_MATRIX)) {
 		discard;
 	}
 	ALBEDO = vec3(1.0, 0.0, 0.0);
@@ -29,7 +26,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
-shader_param/portal_plane = Plane( 0, 0, 0, 0 )
+shader_param/portal_plane = Plane( 1, 1, 0, 0 )
 
 [node name="Cube" type="RigidBody"]
 contacts_reported = 8

@@ -84,7 +84,7 @@ func swap_body_clone(body: RigidBody, clone: RigidBody) -> void:
 	body.linear_velocity = clone_vel
 
 
-func handle_body_overlap_portal(portal: Node, body: PhysicsBody) -> void:
+func handle_clones(portal: Node, body: PhysicsBody) -> void:
 	var linked: Node = links[portal]
 
 	var body_pos := body.global_transform
@@ -114,6 +114,31 @@ func handle_body_overlap_portal(portal: Node, body: PhysicsBody) -> void:
 	# the portal
 	if not in_front_of_portal(portal, body_pos):
 		swap_body_clone(body, clone)
+
+
+func get_portal_plane(portal: Spatial) -> Plane:
+	return portal.global_transform.xform(Plane.PLANE_XY)
+
+
+func portal_plane_rel_body(portal: Spatial, body: PhysicsBody) -> Color:
+	var global_plane := get_portal_plane(portal)
+	var plane: Plane = -body.global_transform.inverse().xform(global_plane)
+	return Color(plane.x, plane.y, plane.z, plane.d)
+
+
+func add_clip_plane(portal: Spatial, body: PhysicsBody) -> void:
+	var plane_pos := portal_plane_rel_body(portal, body)
+	for body_child in body.get_children():
+		if body_child.has_method("get_surface_material"):
+			# TODO: iterate over materials
+			var material = body_child.get_surface_material(0)
+			if material.has_method("set_shader_param"):
+				material.set_shader_param("portal_plane", plane_pos)
+
+
+func handle_body_overlap_portal(portal: Spatial, body: PhysicsBody) -> void:
+	handle_clones(portal, body)
+	add_clip_plane(portal, body)
 
 
 # warning-ignore:unused_argument
