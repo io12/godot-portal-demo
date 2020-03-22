@@ -10,15 +10,14 @@ points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1,
 [sub_resource type="Shader" id=3]
 code = "shader_type spatial;
 
-uniform vec4 portal_plane = vec4(1.0, 0.5, 0.0, 0.0);
+uniform vec4 portal_plane = vec4(0.0, 0.0, 0.0, 0.0);
 
 bool portal_culls(vec3 vertex, mat4 cam) {
 	vec3 pos = (cam * vec4(vertex, 1.0)).xyz;
-	return !any(isnan(portal_plane))
-		&& portal_plane.x * pos.x
-			+ portal_plane.y * pos.y
-			+ portal_plane.z * pos.z
-			+ portal_plane.w < 0.0;
+	return portal_plane.x * pos.x
+		+ portal_plane.y * pos.y
+		+ portal_plane.z * pos.z
+		+ portal_plane.w < 0.0;
 }
 
 void fragment() {
@@ -30,7 +29,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
-shader_param/portal_plane = Plane( 1, 0.5, 0, 0 )
+shader_param/portal_plane = Plane( 0, 0, 0, 0 )
 
 [node name="Cube" type="RigidBody"]
 contacts_reported = 8
