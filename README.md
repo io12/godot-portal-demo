@@ -2,7 +2,7 @@
 
 Experimenting with portals in Godot Engine
 
-[Web build](https://io12.github.io/godot-portal-demo/)
+[Web build (outdated)](https://io12.github.io/godot-portal-demo/)
 
 ![screenshot](screenshot.png)
 
