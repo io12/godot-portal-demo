@@ -93,6 +93,15 @@ func clone_duplicate_material(clone: PhysicsBody) -> void:
 			child.set_surface_material(0, material)
 
 
+# Remove all cameras that are children of `node`
+# TODO: Make this more flexible
+func remove_cameras(node: Node) -> void:
+	for child in node.get_children():
+		remove_cameras(child)
+		if child is Camera:
+			child.free()
+
+
 func handle_clones(portal: Node, body: PhysicsBody) -> void:
 	var linked: Node = links[portal]
 
@@ -116,6 +125,7 @@ func handle_clones(portal: Node, body: PhysicsBody) -> void:
 		add_child(clone)
 		clone.linear_velocity = clone.linear_velocity.rotated(up, PI)
 		clone_duplicate_material(clone)
+		remove_cameras(clone)
 
 	clone.global_transform = linked_pos \
 			* rel_pos.rotated(up, PI)
