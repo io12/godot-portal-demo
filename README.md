@@ -14,7 +14,7 @@ WASD or arrow keys to move, E to pick up cube
 
 This implementation has several issues that need to be fixed before
 the portals can be fully seamless. To fix all of them, Godot needs
-support for [custom projection matrices](https://github.com/godotengine/godot/issues/7499)
+support for [custom projection matrices](https://github.com/godotengine/godot-proposals/issues/2713)
 and [stencil buffering](https://github.com/godotengine/godot/issues/23721), which
 it doesn't have yet.
 
