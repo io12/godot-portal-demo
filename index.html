@@ -3,7 +3,8 @@
 <head>
 	<meta charset='utf-8' />
 	<meta name='viewport' content='width=device-width, user-scalable=no' />
-	<title></title>
+	<link id='-gd-engine-icon' rel='icon' type='image/png' href='favicon.png' />
+	<title>Godot Portal Demo</title>
 	<style type='text/css'>
 
 		body {
@@ -136,16 +137,11 @@
 	<script type='text/javascript' src='portal-demo.js'></script>
 	<script type='text/javascript'>//<![CDATA[
 
-		var engine = new Engine;
-		var setStatusMode;
-		var setStatusNotice;
+		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"portal-demo","experimentalVK":false,"fileSizes":{"portal-demo.pck":217392,"portal-demo.wasm":12649798},"gdnativeLibs":[]};
+		var engine = new Engine(GODOT_CONFIG);
 
 		(function() {
-
-			const MAIN_PACK = 'portal-demo.pck';
 			const INDETERMINATE_STATUS_STEP_MS = 100;
-
-			var canvas = document.getElementById('canvas');
 			var statusProgress = document.getElementById('status-progress');
 			var statusProgressInner = document.getElementById('status-progress-inner');
 			var statusIndeterminate = document.getElementById('status-indeterminate');
@@ -161,23 +157,16 @@
 			}
 			requestAnimationFrame(animate);
 
-			function adjustCanvasDimensions() {
-				canvas.width = innerWidth;
-				canvas.height = innerHeight;
-			}
-			animationCallbacks.push(adjustCanvasDimensions);
-			adjustCanvasDimensions();
-
-			setStatusMode = function setStatusMode(mode) {
+			function setStatusMode(mode) {
 
 				if (statusMode === mode || !initializing)
 					return;
 				[statusProgress, statusIndeterminate, statusNotice].forEach(elem => {
 					elem.style.display = 'none';
 				});
-				if (animateStatusIndeterminate in animationCallbacks) {
-					animationCallbacks.erase(animateStatusIndeterminate);
-				}
+				animationCallbacks = animationCallbacks.filter(function(value) {
+					return (value != animateStatusIndeterminate);
+				});
 				switch (mode) {
 					case 'progress':
 						statusProgress.style.display = 'block';
@@ -198,7 +187,6 @@
 			}
 
 			function animateStatusIndeterminate(ms) {
-
 				var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
 				if (statusIndeterminate.children[i].style.borderTopColor == '') {
 					Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
@@ -208,8 +196,7 @@
 				}
 			}
 
-			setStatusNotice = function setStatusNotice(text) {
-
+			function setStatusNotice(text) {
 				while (statusNotice.lastChild) {
 					statusNotice.removeChild(statusNotice.lastChild);
 				}
@@ -219,22 +206,6 @@
 					statusNotice.appendChild(document.createElement('br'));
 				});
 			};
-
-			engine.setProgressFunc((current, total) => {
-
-				if (total > 0) {
-					statusProgressInner.style.width = current/total * 100 + '%';
-					setStatusMode('progress');
-					if (current === total) {
-						// wait for progress bar animation
-						setTimeout(() => {
-							setStatusMode('indeterminate');
-						}, 500);
-					}
-				} else {
-					setStatusMode('indeterminate');
-				}
-			});
 
 			function displayFailureNotice(err) {
 				var msg = err.message || err;
@@ -248,8 +219,22 @@
 				displayFailureNotice('WebGL not available');
 			} else {
 				setStatusMode('indeterminate');
-				engine.setCanvas(canvas);
-				engine.startGame(MAIN_PACK).then(() => {
+				engine.startGame({
+					'onProgress': function (current, total) {
+						if (total > 0) {
+							statusProgressInner.style.width = current/total * 100 + '%';
+							setStatusMode('progress');
+							if (current === total) {
+								// wait for progress bar animation
+								setTimeout(() => {
+									setStatusMode('indeterminate');
+								}, 500);
+							}
+						} else {
+							setStatusMode('indeterminate');
+						}
+					},
+				}).then(() => {
 					setStatusMode('hidden');
 					initializing = false;
 				}, displayFailureNotice);
