@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Godot Portal Demo"
 run/main_scene="res://assets/levels/Intro.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
