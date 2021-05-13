@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [sub_resource type="Shader" id=6]
 resource_local_to_scene = true
@@ -29,6 +29,8 @@ extents = Vector3( 2, 2, 0 )
 [sub_resource type="CylinderShape" id=5]
 radius = 0.1
 height = 4.0
+
+[sub_resource type="BoxShape" id=9]
 
 [node name="Portal" type="Spatial"]
 
@@ -80,18 +82,50 @@ shape = SubResource( 4 )
 
 [node name="Border" type="StaticBody" parent="."]
 
-[node name="CollisionShapeLow" type="CollisionShape" parent="Border"]
+[node name="CollisionShapeLowFront" type="CollisionShape" parent="Border"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
 shape = SubResource( 5 )
 
-[node name="CollisionShapeHigh" type="CollisionShape" parent="Border"]
+[node name="CollisionShapeLowMiddle" type="CollisionShape" parent="Border"]
+transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
+shape = SubResource( 9 )
+
+[node name="CollisionShapeLowBack" type="CollisionShape" parent="Border"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0.5 )
+shape = SubResource( 5 )
+
+[node name="CollisionShapeHighFront" type="CollisionShape" parent="Border"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
 shape = SubResource( 5 )
 
-[node name="CollisionShapeLeft" type="CollisionShape" parent="Border"]
+[node name="CollisionShapeHighMiddle" type="CollisionShape" parent="Border"]
+transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 2.1, 0.25 )
+shape = SubResource( 9 )
+
+[node name="CollisionShapeHighBack" type="CollisionShape" parent="Border"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0.5 )
+shape = SubResource( 5 )
+
+[node name="CollisionShapeLeftFront" type="CollisionShape" parent="Border"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0 )
 shape = SubResource( 5 )
 
-[node name="CollisionShapeRight" type="CollisionShape" parent="Border"]
+[node name="CollisionShapeLeftMiddle" type="CollisionShape" parent="Border"]
+transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, 2.1, 0, 0.25 )
+shape = SubResource( 9 )
+
+[node name="CollisionShapeLeftBack" type="CollisionShape" parent="Border"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.5 )
+shape = SubResource( 5 )
+
+[node name="CollisionShapeRightFront" type="CollisionShape" parent="Border"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="CollisionShapeRightMiddle" type="CollisionShape" parent="Border"]
+transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, -2.1, 0, 0.25 )
+shape = SubResource( 9 )
+
+[node name="CollisionShapeRightBack" type="CollisionShape" parent="Border"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0.5 )
 shape = SubResource( 5 )
