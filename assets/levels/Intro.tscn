@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/Cube.tscn" type="PackedScene" id=2]
@@ -30,12 +30,52 @@ noise = SubResource( 6 )
 albedo_color = Color( 0.796078, 0.215686, 0.215686, 1 )
 albedo_texture = SubResource( 7 )
 
-[sub_resource type="CylinderMesh" id=9]
+[sub_resource type="Shader" id=9]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D texture_albedo : hint_albedo;
+
+void vertex() {
+}
+
+void fragment() {
+	vec2 base_uv = SCREEN_UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo_tex.rgb;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = SubResource( 9 )
+
+[sub_resource type="Shader" id=11]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D texture_albedo : hint_albedo;
+
+void vertex() {
+}
+
+void fragment() {
+	vec2 base_uv = SCREEN_UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo_tex.rgb;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = SubResource( 11 )
+
+[sub_resource type="CylinderMesh" id=13]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 4.0
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=14]
 albedo_color = Color( 0.219608, 0.901961, 0, 1 )
 
 [node name="Intro" type="Spatial"]
@@ -106,53 +146,61 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 [node name="PortalA" parent="PortalPair" index="0"]
 transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-08, -8.74228e-08, -2.98023e-08, 1, 5.9833, 3.18926, 15 )
 
+[node name="MeshInstance" parent="PortalPair/PortalA" index="2"]
+material_override = SubResource( 10 )
+
 [node name="PortalB" parent="PortalPair" index="1"]
 transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 12.9833, 3.18926, 15 )
+
+[node name="MeshInstance" parent="PortalPair/PortalB" index="2"]
+material_override = SubResource( 12 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
 transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 5.9833, 3.18926, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, -2.1, 0, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="PortalBorderA"]
 transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, 2.1, 0, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="PortalBorderB" type="Spatial" parent="."]
 transform = Transform( -1, 8.29045e-16, 8.74228e-08, -1.77636e-15, 1, -2.98023e-08, -8.74228e-08, -2.98023e-08, -1, 12.9833, 3.18926, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderB"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="PortalBorderB"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="PortalBorderB"]
 transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, -2.1, 0, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="PortalBorderB"]
 transform = Transform( 1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, 2.1, 0, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 14 )
 
 [editable path="PortalPair"]
+[editable path="PortalPair/PortalA"]
+[editable path="PortalPair/PortalB"]

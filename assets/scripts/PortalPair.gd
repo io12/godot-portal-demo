@@ -15,7 +15,7 @@ func init_portal(portal: Node) -> void:
 	var linked: Node = links[portal]
 	var link_viewport: Viewport = linked.get_node("Viewport")
 	var tex := link_viewport.get_texture()
-	var mat = portal.get_node("MeshInstance").material_override
+	var mat = portal.get_node("Screen").get_node("Back").material_override
 	mat.set_shader_param("texture_albedo", tex)
 
 
