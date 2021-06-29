@@ -64,7 +64,7 @@ func _physics_process(delta):
 
 
 func pick_up_object() -> void:
-	var body: Holdable = $Body/Head/ForwardRay.get_collider()
+	var body = $Body/Head/ForwardRay.get_collider()
 	if not body is Holdable:
 		return
 	body.hold($Body/Head/ObjectHolder)

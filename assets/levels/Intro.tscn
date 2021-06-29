@@ -146,13 +146,37 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 5 )
 [node name="PortalA" parent="PortalPair" index="0"]
 transform = Transform( 1, 4.50003e-15, 8.74228e-08, 7.10543e-15, -1, -2.98023e-08, -8.74228e-08, -2.98023e-08, 1, 5.9833, 3.18926, 15 )
 
-[node name="MeshInstance" parent="PortalPair/PortalA" index="2"]
+[node name="Back" parent="PortalPair/PortalA/Screen" index="0"]
+material_override = SubResource( 10 )
+
+[node name="Left" parent="PortalPair/PortalA/Screen" index="1"]
+material_override = SubResource( 10 )
+
+[node name="Right" parent="PortalPair/PortalA/Screen" index="2"]
+material_override = SubResource( 10 )
+
+[node name="Bottom" parent="PortalPair/PortalA/Screen" index="3"]
+material_override = SubResource( 10 )
+
+[node name="Top" parent="PortalPair/PortalA/Screen" index="4"]
 material_override = SubResource( 10 )
 
 [node name="PortalB" parent="PortalPair" index="1"]
 transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 12.9833, 3.18926, 15 )
 
-[node name="MeshInstance" parent="PortalPair/PortalB" index="2"]
+[node name="Back" parent="PortalPair/PortalB/Screen" index="0"]
+material_override = SubResource( 12 )
+
+[node name="Left" parent="PortalPair/PortalB/Screen" index="1"]
+material_override = SubResource( 12 )
+
+[node name="Right" parent="PortalPair/PortalB/Screen" index="2"]
+material_override = SubResource( 12 )
+
+[node name="Bottom" parent="PortalPair/PortalB/Screen" index="3"]
+material_override = SubResource( 12 )
+
+[node name="Top" parent="PortalPair/PortalB/Screen" index="4"]
 material_override = SubResource( 12 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
