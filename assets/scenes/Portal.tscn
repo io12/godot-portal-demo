@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=1]
 resource_local_to_scene = true
 code = "shader_type spatial;
 render_mode unshaded;
@@ -16,11 +16,11 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 6 )
+shader = SubResource( 1 )
 
-[sub_resource type="QuadMesh" id=8]
+[sub_resource type="QuadMesh" id=3]
 size = Vector2( 4, 4 )
 
 [sub_resource type="BoxShape" id=4]
@@ -30,7 +30,7 @@ extents = Vector3( 2, 2, 0 )
 radius = 0.1
 height = 4.0
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=6]
 
 [node name="Portal" type="Spatial"]
 
@@ -40,35 +40,36 @@ height = 4.0
 
 [node name="Back" type="MeshInstance" parent="Screen"]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0.5 )
-material_override = SubResource( 7 )
-mesh = SubResource( 8 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Left" type="MeshInstance" parent="Screen"]
 transform = Transform( -5.46392e-09, 0, -1, 0, 1, 0, 0.125, 0, -4.37114e-08, 2, 0, 0.25 )
-material_override = SubResource( 7 )
-mesh = SubResource( 8 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Right" type="MeshInstance" parent="Screen"]
 transform = Transform( -5.46392e-09, 0, 1, 0, 1, 0, -0.125, 0, -4.37114e-08, -2, 0, 0.25 )
-material_override = SubResource( 7 )
-mesh = SubResource( 8 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Bottom" type="MeshInstance" parent="Screen"]
 transform = Transform( -5.46392e-09, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.125, 4.37114e-08, 1.91069e-15, 0, -2, 0.25 )
-material_override = SubResource( 7 )
-mesh = SubResource( 8 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Top" type="MeshInstance" parent="Screen"]
 transform = Transform( -5.46392e-09, 1, -4.37114e-08, 0, -4.37114e-08, -1, -0.125, -4.37114e-08, 1.91069e-15, 0, 2, 0.25 )
-material_override = SubResource( 7 )
-mesh = SubResource( 8 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Viewport" type="Viewport" parent="."]
+keep_3d_linear = true
 
 [node name="Camera" type="Camera" parent="Viewport"]
 current = true
@@ -88,7 +89,7 @@ shape = SubResource( 5 )
 
 [node name="CollisionShapeLowMiddle" type="CollisionShape" parent="Border"]
 transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 
 [node name="CollisionShapeLowBack" type="CollisionShape" parent="Border"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0.5 )
@@ -100,7 +101,7 @@ shape = SubResource( 5 )
 
 [node name="CollisionShapeHighMiddle" type="CollisionShape" parent="Border"]
 transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 2.1, 0.25 )
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 
 [node name="CollisionShapeHighBack" type="CollisionShape" parent="Border"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0.5 )
@@ -112,7 +113,7 @@ shape = SubResource( 5 )
 
 [node name="CollisionShapeLeftMiddle" type="CollisionShape" parent="Border"]
 transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, 2.1, 0, 0.25 )
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 
 [node name="CollisionShapeLeftBack" type="CollisionShape" parent="Border"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.5 )
@@ -124,7 +125,7 @@ shape = SubResource( 5 )
 
 [node name="CollisionShapeRightMiddle" type="CollisionShape" parent="Border"]
 transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, -2.1, 0, 0.25 )
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 
 [node name="CollisionShapeRightBack" type="CollisionShape" parent="Border"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0.5 )

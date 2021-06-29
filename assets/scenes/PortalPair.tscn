@@ -49,23 +49,47 @@ script = ExtResource( 1 )
 [node name="PortalA" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
 
+[node name="Back" parent="PortalA/Screen" index="0"]
+material_override = SubResource( 2 )
+
+[node name="Left" parent="PortalA/Screen" index="1"]
+material_override = SubResource( 2 )
+
+[node name="Right" parent="PortalA/Screen" index="2"]
+material_override = SubResource( 2 )
+
+[node name="Bottom" parent="PortalA/Screen" index="3"]
+material_override = SubResource( 2 )
+
+[node name="Top" parent="PortalA/Screen" index="4"]
+material_override = SubResource( 2 )
+
 [node name="Camera" parent="PortalA/Viewport" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
-
-[node name="MeshInstance" parent="PortalA" index="2"]
-material_override = SubResource( 2 )
 
 [node name="PortalB" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
 
+[node name="Back" parent="PortalB/Screen" index="0"]
+material_override = SubResource( 4 )
+
+[node name="Left" parent="PortalB/Screen" index="1"]
+material_override = SubResource( 4 )
+
+[node name="Right" parent="PortalB/Screen" index="2"]
+material_override = SubResource( 4 )
+
+[node name="Bottom" parent="PortalB/Screen" index="3"]
+material_override = SubResource( 4 )
+
+[node name="Top" parent="PortalB/Screen" index="4"]
+material_override = SubResource( 4 )
+
 [node name="Camera" parent="PortalB/Viewport" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
 
-[node name="MeshInstance" parent="PortalB" index="2"]
-material_override = SubResource( 4 )
 [connection signal="body_exited" from="PortalA/Area" to="." method="_on_portal_a_body_exited"]
 [connection signal="body_exited" from="PortalB/Area" to="." method="_on_portal_b_body_exited"]
 
 [editable path="PortalA"]
-
 [editable path="PortalB"]
