@@ -15,7 +15,7 @@
 noise = SubResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 1, 0, 0.631373, 1 )
+albedo_color = Color( 0.694118, 0, 0.439216, 1 )
 albedo_texture = SubResource( 3 )
 
 [sub_resource type="ConvexPolygonShape" id=5]
