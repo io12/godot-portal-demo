@@ -103,6 +103,16 @@ material/0 = SubResource( 8 )
 [node name="CollisionShape" type="CollisionShape" parent="RampA/StaticBody"]
 shape = SubResource( 5 )
 
+[node name="Ramp" type="MeshInstance" parent="."]
+transform = Transform( 2.348, 0, 0, 0, 0.304306, -0.780202, 0, 0.0536573, 4.42474, 10.4347, 1.74908, 6.94704 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Ramp"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Ramp/StaticBody"]
+shape = SubResource( 5 )
+
 [node name="RampA2" type="MeshInstance" parent="."]
 transform = Transform( 14.7682, -0.58593, 0, 10.2914, 0.840815, 0, 0, 0, 14.9831, 1.4653, 9.60312, -25 )
 mesh = SubResource( 1 )
@@ -124,7 +134,7 @@ material/0 = SubResource( 8 )
 shape = SubResource( 5 )
 
 [node name="Cube" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.007, 4.89307, 10.2878 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.72064, 4.89307, 10.2878 )
 
 [node name="Button" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, 0 )
@@ -161,10 +171,14 @@ material_override = SubResource( 10 )
 [node name="Top" parent="PortalPair/PortalA/Screen" index="4"]
 material_override = SubResource( 10 )
 
+[node name="CollisionShapeLowMiddle" parent="PortalPair/PortalA/Border" index="1"]
+transform = Transform( 2, 2.64698e-23, 0, -4.23516e-22, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
+
 [node name="PortalB" parent="PortalPair" index="1"]
-transform = Transform( 1, -8.29045e-16, -8.74228e-08, 1.77636e-15, -1, 2.98023e-08, 8.74228e-08, 2.98023e-08, 1, 12.9833, 3.18926, 15 )
+transform = Transform( 1, 3.25841e-07, -5.30863e-14, 0, 1.62921e-07, 1, -3.25841e-07, 1, -1.62921e-07, 8.40383, 39.1124, 15 )
 
 [node name="Back" parent="PortalPair/PortalB/Screen" index="0"]
+transform = Transform( -1, 0, -3.25841e-07, 4.23516e-22, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0.5 )
 material_override = SubResource( 12 )
 
 [node name="Left" parent="PortalPair/PortalB/Screen" index="1"]
@@ -203,7 +217,7 @@ mesh = SubResource( 13 )
 material/0 = SubResource( 14 )
 
 [node name="PortalBorderB" type="Spatial" parent="."]
-transform = Transform( -1, 8.29045e-16, 8.74228e-08, -1.77636e-15, 1, -2.98023e-08, -8.74228e-08, -2.98023e-08, -1, 12.9833, 3.18926, 15 )
+transform = Transform( -1, -3.25841e-07, 5.30863e-14, 0, -1.62921e-07, -1, 3.25841e-07, -1, 1.62921e-07, 8.40336, 39.1127, 15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="PortalBorderB"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
@@ -226,5 +240,7 @@ mesh = SubResource( 13 )
 material/0 = SubResource( 14 )
 
 [editable path="PortalPair"]
+
 [editable path="PortalPair/PortalA"]
+
 [editable path="PortalPair/PortalB"]
