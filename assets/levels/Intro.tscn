@@ -240,7 +240,5 @@ mesh = SubResource( 13 )
 material/0 = SubResource( 14 )
 
 [editable path="PortalPair"]
-
 [editable path="PortalPair/PortalA"]
-
 [editable path="PortalPair/PortalB"]
