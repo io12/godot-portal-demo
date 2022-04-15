@@ -171,6 +171,9 @@ material_override = SubResource( 10 )
 [node name="Top" parent="PortalPair/PortalA/Screen" index="4"]
 material_override = SubResource( 10 )
 
+[node name="Viewport" parent="PortalPair/PortalA" index="2"]
+size = Vector2( 100, 100 )
+
 [node name="CollisionShapeLowMiddle" parent="PortalPair/PortalA/Border" index="1"]
 transform = Transform( 2, 2.64698e-23, 0, -4.23516e-22, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
 
@@ -192,6 +195,9 @@ material_override = SubResource( 12 )
 
 [node name="Top" parent="PortalPair/PortalB/Screen" index="4"]
 material_override = SubResource( 12 )
+
+[node name="Viewport" parent="PortalPair/PortalB" index="2"]
+size = Vector2( 100, 100 )
 
 [node name="PortalBorderA" type="Spatial" parent="."]
 transform = Transform( -1, 8.29045e-16, -8.74228e-08, -1.77636e-15, 1, 2.98023e-08, 8.74228e-08, 2.98023e-08, -1, 5.9833, 3.18926, 15 )

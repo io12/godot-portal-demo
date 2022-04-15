@@ -34,13 +34,13 @@ func move_player() -> void:
 	var basis = $Body.get_global_transform().basis
 
 	# Use relative `basis` for movement so it's relative to player direction
-	if Input.is_action_pressed("move_fd") or Input.is_joy_button_pressed("move_fd"):
+	if Input.is_action_pressed("move_fd"):
 		dir -= basis.z
-	if Input.is_action_pressed("move_bk") or Input.is_joy_button_pressed("move_bk"):
+	if Input.is_action_pressed("move_bk"):
 		dir += basis.z
-	if Input.is_action_pressed("move_left") or Input.is_joy_button_pressed("move_left"):
+	if Input.is_action_pressed("move_left"):
 		dir -= basis.x
-	if Input.is_action_pressed("move_right") or Input.is_joy_button_pressed("move_right"):
+	if Input.is_action_pressed("move_right"):
 		dir += basis.x
 
 	var force: Vector3 = dir.normalized() * WALK_FORCE
