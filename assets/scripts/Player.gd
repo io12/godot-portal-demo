@@ -6,7 +6,7 @@ const WALK_SPEED = 5.0
 const WALK_FORCE = 50.0
 const GRAV_ACCEL = 9.8
 const JUMP_SPEED = 5.0
-const MOUSE_SENSITIVITY = 0.01
+const MOUSE_SENSITIVITY = 0.1
 
 # Object the player is currently holding
 var held_obj: Holdable = null
